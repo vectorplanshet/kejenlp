@@ -33,6 +33,17 @@
     width: 100%;
     height: 100%;
 }
+#map::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: #000;
+  z-index: 1500;
+  pointer-events: none;
+}
 #topbar {
     position: absolute;
     top: 0;
@@ -57,6 +68,7 @@
   position: relative;
   zoom: 0.8; /* 0.667 × 1.2 */
   transform-origin: top left;
+    top: 25px;
 }
 
 .modal {
@@ -288,8 +300,8 @@ input[type="text"] {
 }
 
 .icon-container .icon {
-    width: 28.8px;        /* 24 × 1.2 */
-    height: 28.8px;       /* 24 × 1.2 */
+    width: 26px;        /* 24 × 1.2 */
+    height: 26px;       /* 24 × 1.2 */
     object-fit: cover;
     display: block;
 }
@@ -563,72 +575,77 @@ body {
     width: 17.6px;            /* 14.7×1.2 */
     height: 17.6px;           /* 14.7×1.2 */
 }
+:root {
+  --safe-top: 25px;
+  --safe-bottom: 50px;
+}
 
-/* ---------- Warning Message ---------- */
 #warning-message {
     position: fixed;
-    top: 0;
+    top: calc(var(--safe-top) + 0px);
     width: 100%;
-    height: 20px;             /* 16.7×1.2 */
+    height: 20px;
     background-color: rgba(0, 0, 0, 0.8);
     color: rgb(255, 0, 68);
     text-align: center;
-    padding: 4px;             /* 3.3×1.2 */
-    font-size: 11.2px;        /* 9.3×1.2 */
+    padding: 4px;
+    font-size: 11.2px;
     z-index: 9999;
 }
 
-/* ---------- Version Text ---------- */
+.hidden {
+    display: none;
+}
+
+/* Подпись */
 .menu-text {
     position: fixed;
-    right: 16px;              /* 13.3×1.2 */
-    bottom: 6.4px;            /* 5.3×1.2 */
-    font-size: 12.8px;        /* 10.7×1.2 */
-    color: rgba(0, 0, 0, 0.3);
+    right: 16px;                /* 10 * 1.6 */
+    bottom: 6px;                /* 4 * 1.6 */
+    font-size: 13px;            /* 8 * 1.6 */
+    color: rgba(0,0,0,0.3);
     line-height: 1;
     text-align: right;
     margin-bottom: 0;
-    padding-top: 4.8px;       /* 4×1.2 */
+    padding-top: 5px;           /* 3 * 1.6 */
 }
-
-/* ---------- Dynamic Zoom ---------- */
 .dynamic-zoom {
-    position: absolute;
-    bottom: 24px;             /* 20×1.2 */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: row;
-    gap: 12px;                /* 10×1.2 */
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 1000;
-}
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 1000;
+    }
 
-.dynamic-zoom.show {
-    opacity: 1;
-    pointer-events: auto;
-}
+    .dynamic-zoom.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
 .dynamic-zoom button {
-    width: 36px;              /* 30×1.2 */
-    height: 36px;             /* 30×1.2 */
-    background: white;
-    border: none;
-    cursor: pointer;
-    font-size: 42px;          /* 20×1.2 */
-    padding: 0;
-    margin: 0;
-    line-height: 36px;        /* 30×1.2 */
-    text-align: center;
-    border-radius: 0;
-    box-shadow: none;
-    color: black;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-}
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  font-size: 35px; /* уменьшен размер шрифта */
+  padding: 0;
+  margin: 0;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: none;
 
+  color: black;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
     </style>
 </head>
@@ -1243,8 +1260,8 @@ if (speed >= 120 && speed <= 121) {
                 icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     } else if (iconClass === 'kr') {
         iconUrl = 'kalibr.png';
@@ -1262,8 +1279,8 @@ if (speed >= 120 && speed <= 121) {
         icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     } else if (iconClass === 'zl') {
         const objectId2 = getNextObjectIdBlue();
@@ -1281,8 +1298,8 @@ if (speed >= 120 && speed <= 121) {
         icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     } else if (iconClass === 'blue-id') {
         iconUrl = 'blue.png';
@@ -1299,8 +1316,8 @@ if (speed >= 120 && speed <= 121) {
         icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     } else if (iconClass === 'vertolet') {
         iconClass = 'blue-id';
@@ -1317,8 +1334,8 @@ if (speed >= 120 && speed <= 121) {
         icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     } else if (iconClass === 'perexop') {
         iconHtml = `
@@ -1334,8 +1351,8 @@ if (speed >= 120 && speed <= 121) {
         icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     } else {
         const iconTypes = {
@@ -1360,8 +1377,8 @@ iconHtml = `
         icon = L.divIcon({
             className: 'icon',
             html: iconHtml,
-            iconSize: [28.8, 28.8],
-            iconAnchor: [14.4, 14.4],
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
         });
     }
 }
@@ -1533,118 +1550,104 @@ if (document.readyState === "loading") {
 }
 
 // ==== Верхнее меню ====
+// ==== Верхнее меню ====
 function createTopMenu(marker) {
     if (typeof deleteMode !== 'undefined' && deleteMode) return;
     if (document.getElementById('top-menu-' + objectId)) return;
 
+    // ✅ берём safe-top ИЗ CSS
+    const SAFE_TOP = parseInt(
+        getComputedStyle(document.documentElement)
+            .getPropertyValue('--safe-top')
+    ) || 0;
+
     const menu = document.createElement('div');
     menu.id = 'top-menu-' + objectId;
 
-  const existingMenus = document.querySelectorAll('[id^="top-menu-"]').length;
-// отступ для новой панели (уменьшил зазор)
-const offset = 15 + existingMenus * 30;
+    // считаем, сколько уже есть панелей
+    const existingMenus =
+        document.querySelectorAll('[id^="top-menu-"]').length;
 
-Object.assign(menu.style, {
-    position: 'fixed',
-    top: offset + 'px',
-    left: '0',
-    width: '100%',
-    height: '30px',
-    background: 'rgba(0, 0, 0, 0.4)',
-    color: '#fff',
-    fontFamily: 'Consolas, monospace',
-    fontSize: '13px',
-    zIndex: '9999',
-    borderBottom: '1px solid rgba(255,255,255,0.15)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '0 8px',
-    boxShadow: 'none',
-    transition: 'none'
-});
+    // ✅ корректный offset с учётом чёрной полосы
+    const offset = SAFE_TOP + 18 + existingMenus * 36;
 
-// === Текст ===
-const row = document.createElement('div');
-Object.assign(row.style, {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(6, 1fr)',
-    alignItems: 'center',
-    width: 'calc(100% - 120px)',
-    textAlign: 'center',
-    letterSpacing: '0.3px',
-    columnGap: '12px',
-    paddingRight: '120px'
-});
+    Object.assign(menu.style, {
+        position: 'fixed',
+        top: offset + 'px',
+        left: '0',
+        width: '100%',
+        height: '36px',
+        background: 'rgba(0, 0, 0, 0.4)',
+        color: '#fff',
+        fontFamily: 'Consolas, monospace',
+        fontSize: '15.6px',
+        zIndex: '9999',
+        borderBottom: '1px solid rgba(255,255,255,0.15)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 9.6px',
+        boxShadow: 'none',
+        transition: 'none'
+    });
 
-row.innerHTML = `
-    <div>${objectId}р</div>
-    <div>A0</div>
-    <div>D0</div>
-    <div>H0.0</div>
-    <div>V${speed}</div>
-    <div>1</div>
-`;
+    /* === ТЕКСТ === */
+    const row = document.createElement('div');
+    Object.assign(row.style, {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(6, 1fr)',
+        alignItems: 'center',
+        width: 'calc(100% - 144px)',
+        textAlign: 'center',
+        letterSpacing: '0.36px',
+        columnGap: '14.4px',
+        paddingRight: '144px'
+    });
 
-// === Кнопки ===
-const icons = document.createElement('div');
-Object.assign(icons.style, {
-    position: 'absolute',
-    right: '8px',
-    display: 'flex',
-    gap: '12px'
-});
+    row.innerHTML = `
+        <div>${objectId}р</div>
+        <div>A0</div>
+        <div>D0</div>
+        <div>H0.0</div>
+        <div>V${speed}</div>
+        <div>1</div>
+    `;
 
-icons.innerHTML = `
-    <button id="changeCoordsBtn-${objectId}" title="Изменить маршрут" style="
-        width:26.4px;height:26.4px; /* 22 * 1.2 */
-        border:1px solid rgba(255,255,255,0.25);
-        background: rgb(101, 101, 101);
-        border-radius:2.4px; /* 2 * 1.2 */
-        cursor:pointer;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:0;
-    ">
-        <img src="reload.png" alt="reload" style="width:16.8px;height:16.8px;"> <!-- 14 * 1.2 -->
-    </button>
+    /* === КНОПКИ === */
+    const icons = document.createElement('div');
+    Object.assign(icons.style, {
+        position: 'absolute',
+        right: '9.6px',
+        display: 'flex',
+        gap: '14.4px'
+    });
 
-    <button id="zelenySamBtn-${objectId}" title="Самолёт" style="
-        width:26.4px;height:26.4px;
-        border:1px solid rgba(255,255,255,0.25);
-        background: rgb(101, 101, 101);
-        border-radius:2.4px;
-        cursor:default;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:0;
-    ">
-        <img src="zelenysam.png" alt="plane" style="width:18px;height:18px;"> <!-- 15 * 1.2 -->
-    </button>
+    icons.innerHTML = `
+        <button id="changeCoordsBtn-${objectId}" title="Изменить маршрут"
+            style="width:26.4px;height:26.4px;border:1px solid rgba(255,255,255,0.25);
+                   background:rgb(101, 101, 101);border-radius:2.4px;
+                   display:flex;align-items:center;justify-content:center;padding:0;">
+            <img src="reload.png" style="width:16.8px;height:16.8px;">
+        </button>
 
-    <button id="closeTopMenu-${objectId}" title="Закрыть" style="
-        width:26.4px;height:26.4px;
-        border:1px solid rgba(255,255,255,0.25);
-        background: rgb(101, 101, 101);
-        border-radius:2.4px;
-        cursor:pointer;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:0;
-        font-size:14.4px; /* 12 * 1.2 */
-        color:#222;
-    ">
-        <i class="fas fa-trash-alt"></i>
-    </button>
-`;
+        <button id="zelenySamBtn-${objectId}" title="Самолёт"
+            style="width:26.4px;height:26.4px;border:1px solid rgba(255,255,255,0.25);
+                   background:rgb(101, 101, 101);border-radius:2.4px;
+                   display:flex;align-items:center;justify-content:center;padding:0;">
+            <img src="zelenysam.png" style="width:18px;height:18px;">
+        </button>
+
+        <button id="closeTopMenu-${objectId}" title="Закрыть"
+            style="width:26.4px;height:26.4px;border:1px solid rgba(255,255,255,0.25);
+                   background:rgb(101, 101, 101);border-radius:2.4px;
+                   display:flex;align-items:center;justify-content:center;padding:0;">
+                           <i class="fas fa-trash-alt"></i>
+        </button>
+    `;
 
     menu.appendChild(row);
     menu.appendChild(icons);
     document.body.appendChild(menu);
-
     // обновлено — линия теперь исчезает при закрытии меню
     document.getElementById(`closeTopMenu-${objectId}`).onclick = () => {
         // вернуть иконку в обычный вид, если была раскрыта
@@ -1676,13 +1679,12 @@ if (marker._expanded) {
         marker.isExpanded = false;
     }
 
-    // обновить позиции остальных меню
-    const allMenus = document.querySelectorAll('[id^="top-menu-"]');
-    allMenus.forEach((m, i) => {
-        m.style.top = 15 + i * 30 + 'px';
-    });
-};
-
+        // ✅ перерасчёт всех меню С УЧЁТОМ SAFE-TOP
+        const allMenus = document.querySelectorAll('[id^="top-menu-"]');
+        allMenus.forEach((m, i) => {
+            m.style.top = (SAFE_TOP + 18 + i * 36) + 'px';
+        });
+    };
 
     document.getElementById(`changeCoordsBtn-${objectId}`).onclick = () => {
         openCoordsModal((coordsText) => {
@@ -2336,22 +2338,22 @@ function getNextLitakId() {
     // Проверяем каждые 500 мс
     setInterval(updateAlertCount, 500);
     updateAlertCount();
-    const zoomButtons = document.getElementById('zoom-buttons');
-    let hideTimeout;
+        const zoomButtons = document.getElementById('zoom-buttons');
+        let hideTimeout;
 
-    function showZoomButtons() {
-      zoomButtons.classList.add('show');
-      if (hideTimeout) clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(() => {
-        zoomButtons.classList.remove('show');
-      }, 3000);
-    }
+        function showZoomButtons() {
+        zoomButtons.classList.add('show');
+        if (hideTimeout) clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            zoomButtons.classList.remove('show');
+        }, 3000);
+        }
 
-    map.on('movestart', showZoomButtons);
-    map.on('move', showZoomButtons);
+        map.on('movestart', showZoomButtons);
+        map.on('move', showZoomButtons);
 
-    document.getElementById('zoom-in').onclick = () => map.zoomIn();
-    document.getElementById('zoom-out').onclick = () => map.zoomOut();
+        document.getElementById('zoom-in').onclick = () => map.zoomIn();
+        document.getElementById('zoom-out').onclick = () => map.zoomOut();
 
     </script>
 </body>
